@@ -1,0 +1,33 @@
+.TH METEORPOINTCOUNT 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorPointCount meteorPointCreatedCount meteorTriangleCount meteorTriangleCreatedCount
+meteorTriangleMergeableCount
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "int meteorPointCount(void);"
+.br
+.BI "int meteorPointCreatedCount(void);"
+.br
+.BI "int meteorTriangleCount(void);"
+.br
+.BI "int meteorTriangleCreatedCount(void);"
+.br
+.BI "int meteorTriangleMergableCount(void);"
+.br
+.SH RETURN VALUE
+\fBmeteorPointCount\fP returns the number of points currently in the meteor.
+.sp
+\fBmeteorPointCreatedCount\fP returns the total number of points created since
+the last reset.  If points are eliminated by operations, this number does not
+decrease, (this function is useful for statistics)
+.sp
+\fBmeteorTriangleCount\fP returns the number of triangles currently in the meteor.
+.sp
+\fBmeteorTriangleCreatedCount\fP returns the total number of triangles created
+since the last reset.
+.sp
+\fBmeteorTriangleMergeableCount\fP returns the number of triangles that can be
+eliminated by \fBmeteorMerge\fP during building.
+.SH SEE ALSO
+.BR meteor (1)

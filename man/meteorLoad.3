@@ -1,0 +1,58 @@
+.TH METEORLOAD 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorLoad, meteorSave
+.SH SYNOPSIS
+.B #include <stdio.h>
+.br
+.B #include <meteor.h>
+.sp
+.BI "int meteorLoad(FILE *file, int fileformat);"
+.br
+.BI "int meteorSave(FILE *file, int fileformat);"
+.SH DESCRIPTION
+The functions \fBmeteorLoad\fP and \fBmeteorSave\fP read and write respectively
+the current meteor data from a file stream.  The \fBfileformat\fP parameter
+specifies the format to use, see \fBFORMATS\fP below for possible formats.
+If \fBfile\fP is NULL then no operation is performed, only a test is made
+to verify the given \fBfileformat\fP
+is available.
+.SH FORMATS
+.TP
+.B
+METEOR_FILE_FORMAT_TEXT
+The first line has 3 integers.  The first number is a mask of the point data to
+come. The masks are 1=Position, 2=Normals, 4=Colors, 8=Texcoords.  For example,
+a value of 13 means Position, Colors and Texcoords, a value of 1 means only
+Position.  The second and third numbers are the number of points and triangles.
+The next line is numeric data for first point in the meteor.  The number of
+numbers on this line is based on the mask.  Each point is separated by a
+newline.  After all of the points the triangle data follows as space separated
+triples of point indexes.  The last triangle is followed by two newlines.  To
+see an example of this execute "meteor -nt8 -ex -c-".
+.TP
+.B
+METEOR_FILE_FORMAT_BINARY
+This format is nearly identical to METEOR_FILE_FORMAT_TEXT except it ommits all
+whitespace and newlines, and instead of using ascii representations for
+numbers, 32bit integers, and 64bit ieee754 floats are used.
+This format is potentially less portable but has much faster load and save times
+and also stores more precision.
+.TP
+.B
+METEOR_FILE_FORMAT_WAVEFRONT
+This format is currently only supported for writing and does not support
+colors.  It might be used to import data into other applications.
+
+.SH RETURN VALUE
+These functions return 0 on success and -1 on failure.  \fBmeteorLoad\fP may
+fail if the data read is not in the right format.  Other errors include
+io errors, or use of an unsupported format.  If a failure occurs,
+\fBmeteorError\fP will be set.
+.SH NOTES
+These functions are convenience for reading and writing a meteor from disk, they
+are implemented entirely on top of \fBmeteorReadPoints\fP,
+\fBmeteorReadTriangles\fP, \fBmeteorWritePoints\fP, and \fBmeteorWriteTriangles\fP.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorReadPoints (3)
+.BR meteorError (3)

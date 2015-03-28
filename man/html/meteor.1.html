@@ -1,0 +1,361 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of meteor</TITLE>
+</HEAD><BODY>
+<H1>meteor</H1>
+Section: Meteor Manual Page (1)<BR>Updated: 25 Feb 2007<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteor - Meteor mesh generation tool
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>meteor</B> [<I>options</I>] [<I>input file</I>]
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>meteor</B> is a utility to generate, simplify, and display triangle meshes.
+meteor generates meshes by evaluating functions of the form f(x, y, z) = 0.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>INFORMATION OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>-h, --help</B>
+
+<DD>
+display usage message
+<P>
+<DT><B>--keys</B>
+
+<DD>
+display information about keys at runtime
+<P>
+<DT><B>-v, --verbose</B>
+
+<DD>
+print additional information to the console at runtime
+<P>
+<DT><B>--version</B>
+
+<DD>
+print version information and exit
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>FILE OPTIONS</H2>
+
+<P>
+<DL COMPACT>
+<DT><B>-c, --create [FILE]</B>
+
+<DD>
+Generate an output file of mesh data that can later be read in with the
+--file option.  The file will include vertex data, and optionally
+normal, color, and texture data.  For a detailed description of formats
+see <B>meshSave (3)</B>
+<P>
+<DT><B>-f, --file [FILE]</B>
+
+<DD>
+Read mesh data from a file created by --create instead of generating it.
+With this option an input source file or equation parameter is not used.
+<P>
+<DT><B>--input-format [FORMAT]</B>
+
+<DD>
+specify a format of 'help' to list supported formats
+<P>
+<DT><B>--output-format [FORMAT]</B>
+
+<DD>
+specify a format of 'help' to list supported formats
+<P>
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>GENERATION OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>-a, --animate</B>
+
+<DD>
+Run meteor in animation mode, the input source file should define a function
+named update which is invoked after each frame is built.
+<P>
+<DT><B>-e, --equation</B>
+
+<DD>
+Specify an equation instead of using an input source file.
+This is useful for simple tests, if no = is used, it assumed = 0.
+eg: -ex*x+y*y+z*z=.5
+<P>
+<DT><B>-s, --step step size</B>
+
+<DD>
+Specify the step size to use, default .05  A smaller step size produces more triangles
+at the expense of longer run time.
+<P>
+<DT><B>-[xyz]</B>
+
+<DD>
+Specify the bounds for x, y, or z axis, the default is -1,1.
+eg: &quot;-x -5,5&quot;
+<P>
+<DT><B>--max-frames [NUM]</B>
+
+<DD>
+When --animate is specified, abort after NUM frames have been generated.
+<P>
+<DT><B>--max-triangles [NUM]</B>
+
+<DD>
+Specify the maximum number of triangles in the mesh while building, this
+value can be used to allow processing of much larger meshes than would
+fit in ram as the mesh is contracted while being built.  For the best results,
+NUM should be set higher than the desired final count, and --triangles performs
+merge operations at the end to bring the count down.
+<P>
+</DL>
+<A NAME="lbAH">&nbsp;</A>
+<H2>SIMPLIFICATION OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>-t, --triangles [NUM]</B>
+
+<DD>
+contract edges to get as close as possible to NUM triangles
+<P>
+<DT><B>-j, --aggregation [NUM]</B>
+
+<DD>
+Run the aggregation algorithm on the mesh, merging the closest points together
+until there are not more than NUM points remaining.
+<P>
+<DT><B>--clip [EQUATION]</B>
+
+<DD>
+Remove any data that is under the specified equation
+<P>
+<DT><B>--correct-texcoords</B>
+
+<DD>
+<BR>&nbsp;generate&nbsp;multiple&nbsp;points&nbsp;in&nbsp;the&nbsp;same&nbsp;location&nbsp;attempting&nbsp;to
+correct texture mapping errors, for an example, from the src dir:
+<P>
+meteor models/earth.c --texture models/earth.png --correct-texcoords
+<P>
+<DT><B>-r, --propagate [ITERS]</B>
+
+<DD>
+After the mesh is simplified by merging points, the resulting vertexes will
+be slightly away from the surface, this step will propagate those vertexes
+toward the surface along their normal.  Larger iterations produce better
+results with diminishing returns.
+<P>
+</DL>
+<A NAME="lbAI">&nbsp;</A>
+<H2>TRANSFORMATION OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>--rotate [angle,x,y,z]</B>
+
+<DD>
+Rotate all points and normals by angle in degrees around the vector &lt;x,y,z&gt;
+<P>
+<DT><B>--translate [x,y,z]</B>
+
+<DD>
+Translate all points by the vector &lt;x,y,z&gt;
+<P>
+<DT><B>--scale [x,y,z]</B>
+
+<DD>
+Scale the position of each point by the vector &lt;x,y,z&gt;
+<P>
+</DL>
+<A NAME="lbAJ">&nbsp;</A>
+<H2>DISPLAY OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>-k, --keypress [KEY]</B>
+
+<DD>
+Pass a keyboard input to the program at startup, this is the same as not
+using this option, then pressing key when in glut display mode, but can
+be the only way to modify display parameters in osmesa mode.  For example
+-kl will start up in wireframe mode.  See KEYS.
+<P>
+<DT><B>-o, --no-normals</B>
+
+<DD>
+Do not generate or calculate normals or use lighting when displaying.
+<P>
+<DT><B>-n, --no-display</B>
+
+<DD>
+Do not display, it is still possible to generate mesh data and output
+to a file, or benchmark in this mode, it does not require opengl.
+<P>
+<DT><B>--texture [FILE]</B>
+
+<DD>
+Use image file for displaying the texture.  Right now the only supported
+format is png.
+<P>
+<DT><B>--3D-texture [FILE]</B>
+
+<DD>
+Same as --texture, but instead creates a spherical 3d texture.
+<P>
+<DT><B>--osmesa [FILE]</B>
+
+<DD>
+This option only works if compiled with OSMesa support.  Instead of displaying
+the mesh, a file is generated intead.  If --animate is not specified, then the
+output file will be png, otherwise it is a video based on the extension
+(.mp4 and .avi are known to work).  See --geometry to specify the size.
+<P>
+<DT><B>-g, --geometry WxH</B>
+
+<DD>
+Specify default size hint, if this option is not used, 640x480 will be used.
+<P>
+<DT><B>--loop</B>
+
+<DD>
+When displaying animations from a file, this option will cause the animation
+to loop repeatedly rather than stop on the last mesh
+<P>
+</DL>
+<A NAME="lbAK">&nbsp;</A>
+<H2>INPUT FILE</H2>
+
+The <I>input file</I> is a c source file specifying various functions with
+c-linkage:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init&nbsp;--&nbsp;Called&nbsp;once&nbsp;at&nbsp;startup
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func&nbsp;--&nbsp;Mesh&nbsp;generation&nbsp;function
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normal&nbsp;--&nbsp;Normal&nbsp;function
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color&nbsp;--&nbsp;Color&nbsp;function
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;texcoord&nbsp;--&nbsp;Texcoord&nbsp;function
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;--&nbsp;called&nbsp;after&nbsp;each&nbsp;frame&nbsp;is&nbsp;built&nbsp;in&nbsp;animation&nbsp;mode
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clip&nbsp;--&nbsp;clipping&nbsp;equation
+<P>
+<A NAME="lbAL">&nbsp;</A>
+<H2>KEYS</H2>
+
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arrow&nbsp;keys&nbsp;-&nbsp;</B>
+
+rotate x,y axis
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert/delete&nbsp;-</B>
+
+rotate z axis
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w,a,s,d&nbsp;-&nbsp;</B>
+
+translate on x,y axis
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pageup/pagedown&nbsp;-</B>
+
+translate on z axis
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1,2&nbsp;-</B>
+
+adjust the far clipping plane
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3,4&nbsp;-</B>
+
+adjust the near clipping plane
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5,6&nbsp;-</B>
+
+adjust the field of view
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;-</B>
+
+toggle on/two sided lighting
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;-&nbsp;</B>
+
+begin video capture
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;-&nbsp;</B>
+
+end video capture
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;-&nbsp;</B>
+
+take screenshot
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l&nbsp;-&nbsp;</B>
+
+toggle wireframe mode
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c&nbsp;-&nbsp;</B>
+
+toggle backface culling
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;-&nbsp;</B>
+
+toggle flat shading
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m&nbsp;-&nbsp;</B>
+
+perform one edge reduction
+
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ESC&nbsp;or&nbsp;q&nbsp;-</B>
+
+exit
+<P>
+<A NAME="lbAM">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+
+Sphere: meteor --equation &quot;x*x + y*y + z*z - .5&quot;
+
+Torus: meteor --triangles 2000 --equation &quot;pow(.4 - sqrt(x*x + y*y), 2) + z*z - .1&quot;
+
+From a file: meteor models/sphere.c
+
+Piping: meteor --equation &quot;x*x + y*y + z*z - .5&quot; --no-display --create - | ./meteor --file -
+
+Animated: meteor models/growingsphere.c -as.05 
+<P>
+
+generate 50 frames of a simplified mesh animation of a growing sphere, then use the sphere mesh data and generate a movie of it
+
+meteor sphere.c -c sphere -avnm 1000 --max-frames 50
+
+meteor -af sphere --osmesa sphere.mp4
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">INFORMATION OPTIONS</A><DD>
+<DT><A HREF="#lbAF">FILE OPTIONS</A><DD>
+<DT><A HREF="#lbAG">GENERATION OPTIONS</A><DD>
+<DT><A HREF="#lbAH">SIMPLIFICATION OPTIONS</A><DD>
+<DT><A HREF="#lbAI">TRANSFORMATION OPTIONS</A><DD>
+<DT><A HREF="#lbAJ">DISPLAY OPTIONS</A><DD>
+<DT><A HREF="#lbAK">INPUT FILE</A><DD>
+<DT><A HREF="#lbAL">KEYS</A><DD>
+<DT><A HREF="#lbAM">EXAMPLES</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

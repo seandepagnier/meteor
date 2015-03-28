@@ -1,0 +1,20 @@
+.TH METEORCLIP 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorClip
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "void meteorClip(double (*func)(double, double, double));"
+.SH DESCRIPTION
+Remove points and triangles from the meteor according to \fBfunc\fP.
+\fBfunc\fP is invoked with the position of each point in the meteor,
+if the return value of this function is negative, the point will
+be removed.
+
+Any triangles that have some but not all of their points removed
+have new points added so that their positions are as close as possible
+to the return of 0 from \fBfunc\fP. Because of this, the clipping operation
+can increase the number of points and triangles in the meteor, but typically
+reduces the number.
+.SH SEE ALSO
+.BR meteor (1)

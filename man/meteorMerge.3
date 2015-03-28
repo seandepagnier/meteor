@@ -1,0 +1,23 @@
+.TH METEORMERGE 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorMerge
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "int meteorMerge(void);"
+.SH DESCRIPTION
+Attempt to perform a pair contraction based on quadric errors.  To
+obtain the total number of triangles that can potentially be removed,
+call \fBmeteorTriangleMergableCount\fP, this value only differs from
+\fBmeteorTriangleCount\fP if the meteor is not completely built yet.
+.SH RETURN VALUE
+The number of triangles removed from the meteor.  Typically this value
+is 2 because an edge is removed with a triangle on either side, however
+any value is theoretically possible. A value of 0 indicates failure.
+.SH NOTE
+Can be called before meteorBuild returns 0, see \fBmeteorBuild (3)\fP for details.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorBuild (3)
+.BR meteorTriangleMergableCount (3)
+.BR meteorTriangleCount (3)

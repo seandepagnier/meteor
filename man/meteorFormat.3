@@ -1,0 +1,16 @@
+.TH METEORFORMAT 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorFormat
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "int meteorFormat(void);"
+.SH DESCRIPTION
+This function returns the format used by the meteor, previously set by
+\fBmeteorReset\fP, it is \fBMETEOR_COORDS\fP by default.
+.SH RETURN VALUE
+A format mask specifying the data in the meteor, see \fBmeteorReset\fP for more
+information.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorReset (3)

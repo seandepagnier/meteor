@@ -1,0 +1,66 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORPROPAGATE</TITLE>
+</HEAD><BODY>
+<H1>METEORPROPAGATE</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorPropagate
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>double meteorPropagate(int iterations);</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This function attempts to improve the position of points in the meteor. It
+requires a meteorFunc and meteorNormalFunc to be set as it moves the point toward
+or away from the surface along its normal.  The larger the <B>iterations</B>
+parameter is, the better the results will be.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+The return value gives some indication of the improvement, a value of 1 means
+it moved all points that were not already at their zero to zero, and is the
+best possible case.  A value of zero means no improvement occured.
+<A NAME="lbAF">&nbsp;</A>
+<H2>NOTES</H2>
+
+The algorithm only works well with equations with smooth normals, and values
+that approach zero as the surface is reached.
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+<B><A HREF="../man3/meteorFunc.3.html">meteorFunc</A></B>(3)
+
+<B><A HREF="../man3/meteorNormalFunc.3.html">meteorNormalFunc</A></B>(3)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">NOTES</A><DD>
+<DT><A HREF="#lbAG">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

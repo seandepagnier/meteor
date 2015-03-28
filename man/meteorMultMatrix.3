@@ -1,0 +1,21 @@
+.TH METEORMERGE 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorMultMatrix meteorRotate meteorTranslate meteorScale
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "void meteorMultMatrix(double m[16]);"
+.br
+.BI "void meteorRotate(double angle, double x, double y, double z);"
+.br
+.BI "void meteorTranslate(double x, double y, double z);"
+.br
+.BI "void meteorScale(double x, double y, double z);"
+.SH DESCRIPTION
+Apply matrix transformations to the meteor for each point.  Normals are rotated without
+translation. \fBmeteorMultMatrix\fP applies a given 4x4 matrix.
+\fBmeteorRotate\fP performs a rotation of \fBangle\fP around the vector
+\fB<x, y, z>\fP.  \fBmeteorTranslate\fP translates each point.
+\fBmeteorScale\fP applies scaling.
+.SH SEE ALSO
+.BR meteor (1)

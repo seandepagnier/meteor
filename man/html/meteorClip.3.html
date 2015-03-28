@@ -1,0 +1,55 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORCLIP</TITLE>
+</HEAD><BODY>
+<H1>METEORCLIP</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorClip
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>void meteorClip(double (*func)(double, double, double));</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Remove points and triangles from the meteor according to <B>func</B>.
+<B>func</B> is invoked with the position of each point in the meteor,
+if the return value of this function is negative, the point will
+be removed.
+<P>
+Any triangles that have some but not all of their points removed
+have new points added so that their positions are as close as possible
+to the return of 0 from <B>func</B>. Because of this, the clipping operation
+can increase the number of points and triangles in the meteor, but typically
+reduces the number.
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

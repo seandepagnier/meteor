@@ -1,0 +1,56 @@
+.TH METEORREADPOINTS 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorReadPoints, meteorReadTriangles, meteorWritePoints,  meteorWriteTriangles
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "int meteorReadPoints(int count, int format, int type, void *data);"
+.br
+.BI "int meteorReadTriangles(int count, int format, int type, void *data);"
+.br
+.BI "int meteorWritePoints(int count, int format, int type, const void *data);"
+.br
+.BI "int meteorWriteTriangles(int count, int format, int type, const void *data);"
+.SH DESCRIPTION
+These functions provide low-level access to point and triangle data.  The
+orientation of the triangle is determined by the order of the triple.
+.SH COUNT
+The count specifies how many Points or Triangles to process with this call.
+.SH FORMAT
+The \fBformat\fP parameter determines what data
+to operate on.  The format is either \fBMETEOR_INDEX\fP, or a bitwise mask of
+\fBMETEOR_COORDS\fP, \fBMETEOR_NORMALS\fP, \fBMETEOR_COLORS\fP,
+and \fBMETEOR_TEXCOORDS\fP.  The pointdata that is stored or retrieved
+from the \fBdata\fP parameter is either a single value which is an index for
+the point, or a sequence of tightly packed triples containing at least one of:
+coords, normals, colors, or texture coordinates in this order. All data has 3
+parts except index data has 1 part.  An index of 0 is the first point when
+using \fBmeteorReadPoints\fP or \fBmeteorWritePoints\fP. The highest index
+is 1 less than meteorPointCount().  \fBMETEOR_INDEX\fP cannot be used when
+writing points.  When writing points, a new point is created if
+\fBMETEOR_COORDS\fP is specified, otherwise, the current point's data is
+updated.  When writing triangles, a new triangle is always created.
+.SH TYPE
+The \fBtype\fP parameter specifies the type of the data,
+\fBMETEOR_INT\fP, \fBMETEOR_UNSIGNED_INT\fP, \fBMETEOR_FLOAT\fP,
+\fBMETEOR_DOUBLE\fP, and \fBMETEOR_LONG_DOUBLE\fP are supported.
+.SH RETURN VALUE
+On error, -1 is returned, and \fBmeteorError\fP is set. Otherwise the count
+processed is returned.  When reading, if this value is less than \fBcount\fP
+then there is no more data to read.  Subsequent calls before calling
+\fBmeteorRewind\fP will return 0.
+.SH ERRORS
+These functions will fail if:
+.br
+1. The data \fBformat\fP requested does not exist in the meteor.
+.br 
+2. The data \fBtype\fP is not supported.
+.br
+3. When reading data, \fBmeteorRewind\fP was not called since other meteor modification has
+occured.
+.br
+4. When writing triangles, specifying data along with index data.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorRewind (3)
+.BR meteorError (3)

@@ -1,0 +1,43 @@
+Meteor - mesh generation and manipulation tool and library
+
+Inspired by the desire to generate triangle representations of
+interstellar objects in various levels of detail.
+
+Written by Sean D'Epagnier (sean@depagnier.com)
+
+The main features of the library are:
+1. Mesh generation -- Uses equations of the form f(x, y, z) = 0
+2. Quadric pair contraction -- Reduce triangle and point count.
+3. Aggregation -- Merge nearby sections of the mesh together
+4. Clipping -- Removal of all data on one side of an equation
+5. Duplication of points -- Correction for texture coordinates
+6. IO routines -- can save and load in various formats (can convert
+data from one format to another)
+
+There exist simplified demo programs that demonstrate the usage
+of the library.
+
+The command-line app meteor provides an interface to all of the above
+operations, as well as:
+
+1. accept equations, source files with functions, or data files.
+2. write output to data files 
+3. display the mesh (requires opengl and glut)
+4. animate meshes (can be based on a 4th variable)
+5. take screenshots and generate video files (with required libraries)
+
+For information on how to invoke meteor, consult the man page
+
+This program uses glut for maximum portability, it is designed to work well
+with the linux-fbdev opengl mesa driver and its glut implementation.
+
+To generate documentation in html format with man2html installed invoke
+"make man2html" in the man directory and check the subdirectory html.
+
+See COPYING for license details.
+See INSTALL for compiling instructions.
+
+There are many more possible features of this program in the future, I just
+haven't had time to implement them, feel free to make requests.
+
+bug reports, feature requests, and patches should be sent to sean@depagnier.com

@@ -1,0 +1,28 @@
+Quickstart:
+
+run ./configure; make; make install
+
+===========
+
+Most features are autodetected an displayed after running ./configure
+
+The --with-float-format option lets you select float, double, or long double
+for the internal format for the mesh operations.
+
+double is the default as it is not typically slower than float, uses a little
+more memory, but has much better precision.  For some algorithms such as
+quadric merging, floats do not provide adequate accuracy.
+
+===========
+
+For debugging support configure with --enable-debug and --disable-shared
+
+===========
+
+A good way to get information about all the configuration options is
+./configure --help 
+
+===========
+
+The simplest way to verify succes after install is by running
+meteor -nvez

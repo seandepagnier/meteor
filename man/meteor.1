@@ -1,0 +1,262 @@
+.TH meteor 1 "25 Feb 2007" "Version 0.6" "Meteor Manual Page"
+
+.SH NAME
+meteor \- Meteor mesh generation tool
+
+.SH SYNOPSIS
+\fBmeteor\fP [\fIoptions\fP] [\fIinput file\fP]
+
+.SH DESCRIPTION
+\fBmeteor\fP is a utility to generate, simplify, and display triangle meshes.
+meteor generates meshes by evaluating functions of the form f(x, y, z) = 0.
+
+.SH INFORMATION OPTIONS
+.TP
+.B -h, --help
+display usage message
+
+.TP
+.B --keys
+display information about keys at runtime
+
+.TP
+.B -q, --quiet
+hid console output
+
+.TP
+.B --version
+print version information and exit
+
+.SH FILE OPTIONS
+
+.TP
+.B -c, --create [FILE]
+Generate an output file of mesh data that can later be read in with the
+--file option.  The file will include vertex data, and optionally
+normal, color, and texture data.  For a detailed description of formats
+see \fBmeshSave (3)\fP
+
+.TP
+.B -f, --file [FILE]
+Read mesh data from a file created by --create instead of generating it.
+With this option an input source file or equation parameter is not used.
+
+.TP
+.B --input-format [FORMAT]
+specify a format of 'help' to list supported formats
+
+.TP
+.B --output-format [FORMAT]
+specify a format of 'help' to list supported formats
+
+.SH GENERATION OPTIONS
+.TP
+.B -a, --animate
+Run meteor in animation mode, the input source file should define a function
+named update which is invoked after each frame is built.
+
+.TP
+.B -e, --equation
+Specify an equation instead of using an input source file.
+This is useful for simple tests, if no = is used, it assumed = 0.
+eg: -ex*x+y*y+z*z=.5
+
+.TP
+.B -s, --step step size
+Specify the step size to use, default .05  A smaller step size produces more triangles
+at the expense of longer run time.
+
+.TP
+.B -[xyz]
+Specify the bounds for x, y, or z axis, the default is -1,1.
+eg: "-x -5,5"
+
+.TP
+.B --max-frames [NUM]
+When --animate is specified, abort after NUM frames have been generated.
+
+.TP
+.B --max-triangles [NUM]
+Specify the maximum number of triangles in the mesh while building, this
+value can be used to allow processing of much larger meshes than would
+fit in ram as the mesh is contracted while being built.  For the best results,
+NUM should be set higher than the desired final count, and --triangles performs
+merge operations at the end to bring the count down.
+
+.SH SIMPLIFICATION OPTIONS
+.TP
+.B -t, --triangles [NUM]
+contract edges to get as close as possible to NUM triangles
+
+.TP
+.B -j, --aggregation [NUM]
+Run the aggregation algorithm on the mesh, merging the closest points together
+until there are not more than NUM points remaining.
+
+.TP
+.B --clip [EQUATION]
+Remove any data that is under the specified equation
+
+.TP
+.B --correct-texcoords
+ generate multiple points in the same location attempting to
+correct texture mapping errors, for an example, from the src dir:
+
+meteor models/earth.c --texture models/earth.png --correct-texcoords
+
+.TP
+.B -r, --propagate [ITERS]
+After the mesh is simplified by merging points, the resulting vertexes will
+be slightly away from the surface, this step will propagate those vertexes
+toward the surface along their normal.  Larger iterations produce better
+results with diminishing returns.
+
+.SH TRANSFORMATION OPTIONS
+.TP
+.B --rotate [angle,x,y,z]
+Rotate all points and normals by angle in degrees around the vector <x,y,z>
+
+.TP
+.B --translate [x,y,z]
+Translate all points by the vector <x,y,z>
+
+.TP
+.B --scale [x,y,z]
+Scale the position of each point by the vector <x,y,z>
+
+.SH DISPLAY OPTIONS
+.TP
+.B -k, --keypress [KEY]
+Pass a keyboard input to the program at startup, this is the same as not
+using this option, then pressing key when in glut display mode, but can
+be the only way to modify display parameters in osmesa mode.  For example
+-kl will start up in wireframe mode.  See KEYS.
+
+.TP
+.B -o, --no-normals
+Do not generate or calculate normals or use lighting when displaying.
+
+.TP
+.B -n, --no-display
+Do not display, it is still possible to generate mesh data and output
+to a file, or benchmark in this mode, it does not require opengl.
+
+.TP
+.B --texture [FILE]
+Use image file for displaying the texture.  Right now the only supported
+format is png.
+
+.TP
+.B --3D-texture [FILE]
+Same as --texture, but instead creates a spherical 3d texture.
+
+.TP
+.B  --osmesa [FILE]
+This option only works if compiled with OSMesa support.  Instead of displaying
+the mesh, a file is generated intead.  If --animate is not specified, then the
+output file will be png, otherwise it is a video based on the extension
+(.mp4 and .avi are known to work).  See --geometry to specify the size.
+
+.TP
+.B -g, --geometry WxH
+Specify default size hint, if this option is not used, 640x480 will be used.
+
+.TP
+.B --loop
+When displaying animations from a file, this option will cause the animation
+to loop repeatedly rather than stop on the last mesh
+
+.SH INPUT FILE
+The \fIinput file\fP is a c source file specifying various functions with
+c-linkage:
+        init -- Called once at startup
+        func -- Mesh generation function
+        normal -- Normal function
+        color -- Color function
+        texcoord -- Texcoord function
+        update -- called after each frame is built in animation mode
+        clip -- clipping equation
+
+.SH KEYS
+.RE
+.B
+        arrow keys - 
+rotate x,y axis
+.RE
+.B
+        insert/delete -
+rotate z axis
+.RE
+.B
+        w,a,s,d - 
+translate on x,y axis
+.RE
+.B
+        pageup/pagedown -
+translate on z axis
+.RE
+.B
+        1,2 -
+adjust the far clipping plane
+.RE
+.B
+        3,4 -
+adjust the near clipping plane
+.RE
+.B
+        5,6 -
+adjust the field of view
+.RE
+.B
+        o -
+toggle on/two sided lighting
+.RE
+.B
+        v - 
+begin video capture
+.RE
+.B
+        b - 
+end video capture
+.RE
+.B
+        n - 
+take screenshot
+.RE
+.B
+        l - 
+toggle wireframe mode
+.RE
+.B
+        c - 
+toggle backface culling
+.RE
+.B
+        f - 
+toggle flat shading
+.RE
+.B
+        m - 
+perform one edge reduction
+.RE
+.B
+        ESC or q -
+exit
+
+.SH EXAMPLES
+.RE
+Sphere: meteor --equation "x*x + y*y + z*z - .5"
+.RE
+Torus: meteor --triangles 2000 --equation "pow(.4 - sqrt(x*x + y*y), 2) + z*z - .1"
+.RE
+From a file: meteor models/sphere.c
+.RE
+Piping: meteor --equation "x*x + y*y + z*z - .5" --no-display --create - | ./meteor --file -
+.RE
+Animated: meteor models/growingsphere.c -as.05 
+.PP
+generate 50 frames of a simplified mesh animation of a growing sphere, then use the sphere mesh data and generate a movie of it
+.RE
+meteor sphere.c -c sphere -avnm 1000 --max-frames 50
+.RE
+meteor -af sphere --osmesa sphere.mp4

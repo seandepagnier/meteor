@@ -1,0 +1,22 @@
+.TH METEORBUILD 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorBuild
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "int meteorBuild(void);"
+.SH DESCRIPTION
+\fBmeteorBuild\fP builds 1 layer of a mesh from a function specified by
+\fBmeteorFunc\fP in the space specified by \fBmeteorSetSize\fP.  These
+two functions must be called before invoking \fBmeteorBuild\fP.
+.SH NOTES
+\fBmeteorMerge\fP may be called while building.  This allows the total
+memory usage to be greatly reduced as it is simplified while building.
+Any other meteor manipulation calls made while the build is incomplete have
+undefined behavior.
+.SH RETURN VALUE
+\fBmeteorBuild\fP returns the number of times it must be invoked to complete
+building.  If the return value is zero, the meteor is built; in this case
+invoking \fBmeteorBuild\fP again will reset the meteor and start building again.
+.SH SEE ALSO
+.BR meteor (1)

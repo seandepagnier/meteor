@@ -1,0 +1,23 @@
+.TH METEORPROPAGATE 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorPropagate
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "double meteorPropagate(int iterations);"
+.SH DESCRIPTION
+This function attempts to improve the position of points in the meteor. It
+requires a meteorFunc and meteorNormalFunc to be set as it moves the point toward
+or away from the surface along its normal.  The larger the \fBiterations\fP
+parameter is, the better the results will be.
+.SH RETURN VALUE
+The return value gives some indication of the improvement, a value of 1 means
+it moved all points that were not already at their zero to zero, and is the
+best possible case.  A value of zero means no improvement occured.
+.SH NOTES
+The algorithm only works well with equations with smooth normals, and values
+that approach zero as the surface is reached.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorFunc (3)
+.BR meteorNormalFunc (3)

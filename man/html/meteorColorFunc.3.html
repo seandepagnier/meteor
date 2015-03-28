@@ -1,0 +1,78 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORFUNC</TITLE>
+</HEAD><BODY>
+<H1>METEORFUNC</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorFunc meteorNormalFunc meteorTextureFunc meteorColorFunc
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>void meteorFunc(double (*func)(double x, double y, double z));</B>
+
+<BR>
+
+<B>void meteorNormalFunc(void (*func)(double[3], double[3]));</B>
+
+<BR>
+
+<B>void meteorColorFunc(void (*func)(double[3], double[3]));</B>
+
+<BR>
+
+<B>void meteorTextureFunc(void (*func)(double[3], double[3]));</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions set the callback functions for building a meteor.
+<B>meteorFunc</B> is required for building, the other functions are optional.
+The function provided to <B>meteorFunc</B> should return positive values if
+a point (specified by x, y, z) is outside the surface, negative values
+inside the surface, and 0 if the point lies on the surface.
+<P>
+The functions <B>meteorNormalFunc</B>, <B>meteorColorFunc</B>, and <B>meteorTextureFunc</B>
+specify means of calculating these parameters, if NULL is passed the callback
+is disabled.  The first argument of type <B>double[3]</B> is the destination
+value, and the second argument also of type <B>double[3]</B> is the source location
+as an x, y, z position.
+<A NAME="lbAE">&nbsp;</A>
+<H2>NOTES</H2>
+
+These functions are invoked while performing various operations on the meteor to
+improve the results.  If not specified, fallbacks (such as averaging the values
+for two points in the case of merging) are used instead.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+<B><A HREF="../man3/meteorBuild.3.html">meteorBuild</A>(3)</B>
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">NOTES</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

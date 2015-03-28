@@ -1,0 +1,111 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORLOAD</TITLE>
+</HEAD><BODY>
+<H1>METEORLOAD</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorLoad, meteorSave
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/stdio.h">stdio.h</A>&gt;</B>
+
+<BR>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>int meteorLoad(FILE *file, int fileformat);</B>
+
+<BR>
+
+<B>int meteorSave(FILE *file, int fileformat);</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+The functions <B>meteorLoad</B> and <B>meteorSave</B> read and write respectively
+the current meteor data from a file stream.  The <B>fileformat</B> parameter
+specifies the format to use, see <B>FORMATS</B> below for possible formats.
+If <B>file</B> is NULL then no operation is performed, only a test is made
+to verify the given <B>fileformat</B>
+is available.
+<A NAME="lbAE">&nbsp;</A>
+<H2>FORMATS</H2>
+
+<DL COMPACT>
+<DT><B>METEOR_FILE_FORMAT_TEXT</B>
+
+<DD>
+The first line has 3 integers.  The first number is a mask of the point data to
+come. The masks are 1=Position, 2=Normals, 4=Colors, 8=Texcoords.  For example,
+a value of 13 means Position, Colors and Texcoords, a value of 1 means only
+Position.  The second and third numbers are the number of points and triangles.
+The next line is numeric data for first point in the meteor.  The number of
+numbers on this line is based on the mask.  Each point is separated by a
+newline.  After all of the points the triangle data follows as space separated
+triples of point indexes.  The last triangle is followed by two newlines.  To
+see an example of this execute &quot;meteor -nt8 -ex -c-&quot;.
+<DT><B>METEOR_FILE_FORMAT_BINARY</B>
+
+<DD>
+This format is nearly identical to METEOR_FILE_FORMAT_TEXT except it ommits all
+whitespace and newlines, and instead of using ascii representations for
+numbers, 32bit integers, and 64bit ieee754 floats are used.
+This format is potentially less portable but has much faster load and save times
+and also stores more precision.
+<DT><B>METEOR_FILE_FORMAT_WAVEFRONT</B>
+
+<DD>
+This format is currently only supported for writing and does not support
+colors.  It might be used to import data into other applications.
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+These functions return 0 on success and -1 on failure.  <B>meteorLoad</B> may
+fail if the data read is not in the right format.  Other errors include
+io errors, or use of an unsupported format.  If a failure occurs,
+<B>meteorError</B> will be set.
+<A NAME="lbAG">&nbsp;</A>
+<H2>NOTES</H2>
+
+These functions are convenience for reading and writing a meteor from disk, they
+are implemented entirely on top of <B>meteorReadPoints</B>,
+<B>meteorReadTriangles</B>, <B>meteorWritePoints</B>, and <B>meteorWriteTriangles</B>.
+<A NAME="lbAH">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+<B><A HREF="../man3/meteorReadPoints.3.html">meteorReadPoints</A></B>(3)
+
+<B><A HREF="../man3/meteorError.3.html">meteorError</A></B>(3)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">FORMATS</A><DD>
+<DT><A HREF="#lbAF">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAG">NOTES</A><DD>
+<DT><A HREF="#lbAH">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

@@ -1,0 +1,63 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORBUILD</TITLE>
+</HEAD><BODY>
+<H1>METEORBUILD</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorBuild
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>int meteorBuild(void);</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>meteorBuild</B> builds 1 layer of a meteor from a function specified by
+<B>meteorFunc</B> in the space specified by <B>meteorSetSize</B>.  These
+two functions must be called before invoking <B>meteorBuild</B>.
+<A NAME="lbAE">&nbsp;</A>
+<H2>NOTES</H2>
+
+<B>meteorMerge</B> may be called while building.  This allows the total
+memory usage to be greatly reduced as it is simplified while building.
+Any other meteor manipulation calls made while the build is incomplete have
+undefined behavior.
+<A NAME="lbAF">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>meteorBuild</B> returns the number of times it must be invoked to complete
+building.  If the return value is zero, the meteor is built; in this case
+invoking <B>meteorBuild</B> again will reset the meteor and start building again.
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">NOTES</A><DD>
+<DT><A HREF="#lbAF">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAG">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

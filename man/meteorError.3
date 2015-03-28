@@ -1,0 +1,17 @@
+.TH METEORERROR 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorMerge
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "const char *meteorError(void)"
+.SH DESCRIPTION
+This function provides human readable error messages when an error occurs.
+Calling \fBmeteorError\fP will clear the last error.
+.SH RETURN VALUE
+If an error occured since the last call to \fBmeteorError\fP then an error
+description string is returned, otherwise NULL is returned;
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorFunc (3)
+.BR meteorNormalFunc (3)

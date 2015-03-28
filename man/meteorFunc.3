@@ -1,0 +1,32 @@
+.TH METEORFUNC 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorFunc meteorNormalFunc meteorTextureFunc meteorColorFunc
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "void meteorFunc(double (*func)(double x, double y, double z));"
+.br
+.BI "void meteorNormalFunc(void (*func)(double[3], double[3]));"
+.br
+.BI "void meteorColorFunc(void (*func)(double[3], double[3]));"
+.br
+.BI "void meteorTextureFunc(void (*func)(double[3], double[3]));"
+.SH DESCRIPTION
+These functions set the callback functions for building a meteor.
+\fBmeteorFunc\fP is required for building, the other functions are optional.
+The function provided to \fBmeteorFunc\fP should return positive values if
+a point (specified by x, y, z) is outside the surface, negative values
+inside the surface, and 0 if the point lies on the surface.
+.sp
+The functions \fBmeteorNormalFunc\fP, \fBmeteorColorFunc\fP, and \fBmeteorTextureFunc\fP
+specify means of calculating these parameters, if NULL is passed the callback
+is disabled.  The first argument of type \fBdouble[3]\fP is the destination
+value, and the second argument also of type \fBdouble[3]\fP is the source location
+as an x, y, z position.
+.SH NOTES
+These functions are invoked while performing various operations on the meteor to
+improve the results.  If not specified, fallbacks (such as averaging the values
+for two points in the case of merging) are used instead.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorBuild(3)

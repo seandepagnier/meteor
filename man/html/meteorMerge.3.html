@@ -1,0 +1,67 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORMERGE</TITLE>
+</HEAD><BODY>
+<H1>METEORMERGE</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorMerge
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>int meteorMerge(void);</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Attempt to perform a pair contraction based on quadric errors.  To
+obtain the total number of triangles that can potentially be removed,
+call <B>meteorTriangleMergableCount</B>, this value only differs from
+<B>meteorTriangleCount</B> if the meteor is not completely built yet.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+The number of triangles removed from the meteor.  Typically this value
+is 2 because an edge is removed with a triangle on either side, however
+any value is theoretically possible. A value of 0 indicates failure.
+<A NAME="lbAF">&nbsp;</A>
+<H2>NOTE</H2>
+
+Can be called before meteorBuild returns 0, see <B>meteorBuild (3)</B> for details.
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+<B><A HREF="../man3/meteorBuild.3.html">meteorBuild</A></B>(3)
+
+<B><A HREF="../man3/meteorTriangleMergableCount.3.html">meteorTriangleMergableCount</A></B>(3)
+
+<B><A HREF="../man3/meteorTriangleCount.3.html">meteorTriangleCount</A></B>(3)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">NOTE</A><DD>
+<DT><A HREF="#lbAG">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

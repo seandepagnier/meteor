@@ -1,0 +1,78 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORPOINTCOUNT</TITLE>
+</HEAD><BODY>
+<H1>METEORPOINTCOUNT</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorPointCount meteorPointCreatedCount meteorTriangleCount meteorTriangleCreatedCount
+meteorTriangleMergeableCount
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>int meteorPointCount(void);</B>
+
+<BR>
+
+<B>int meteorPointCreatedCount(void);</B>
+
+<BR>
+
+<B>int meteorTriangleCount(void);</B>
+
+<BR>
+
+<B>int meteorTriangleCreatedCount(void);</B>
+
+<BR>
+
+<B>int meteorTriangleMergableCount(void);</B>
+
+<BR>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>meteorPointCount</B> returns the number of points currently in the meteor.
+<P>
+<B>meteorPointCreatedCount</B> returns the total number of points created since
+the last reset.  If points are eliminated by operations, this number does not
+decrease, (this function is useful for statistics)
+<P>
+<B>meteorTriangleCount</B> returns the number of triangles currently in the meteor.
+<P>
+<B>meteorTriangleCreatedCount</B> returns the total number of triangles created
+since the last reset.
+<P>
+<B>meteorTriangleMergeableCount</B> returns the number of triangles that can be
+eliminated by <B>meteorMerge</B> during building.
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

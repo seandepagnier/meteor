@@ -1,0 +1,22 @@
+.TH METEORMERGE 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorMerge
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "void meteorCorrectTexCoords(void)"
+.SH DESCRIPTION
+If the meteor does not contain texture data no operation is performed.
+
+Attempt to correct wrapping in texture coordinates.  The algorithm
+will insert points and triangles into the meteor in places where points
+have texture coordinates that would span a large distances.  For example
+if points with texture coordinates of .1 and .9 are bound by an edge,
+then the algorithm will insert two new points at the same position between
+these points.  The new points will have texture coordinates 0, and 1, and
+will be attached to .1 and .9 respectively.  This operation is performed
+for each dimension.  The algorithm has more accurate results if a function
+is supplied to \fBmeteorTexCoordFunc\fP.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorTexCoordFunc (3)

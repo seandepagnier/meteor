@@ -1,0 +1,119 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of METEORREADPOINTS</TITLE>
+</HEAD><BODY>
+<H1>METEORREADPOINTS</H1>
+Section: C Library Functions (3)<BR>Updated: 2007-02-25<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+meteorReadPoints, meteorReadTriangles, meteorWritePoints,  meteorWriteTriangles
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>#include &lt;<A HREF="file:/usr/include/meteor.h">meteor.h</A>&gt;</B>
+
+<P>
+<B>int meteorReadPoints(int count, int format, int type, void *data);</B>
+
+<BR>
+
+<B>int meteorReadTriangles(int count, int format, int type, void *data);</B>
+
+<BR>
+
+<B>int meteorWritePoints(int count, int format, int type, const void *data);</B>
+
+<BR>
+
+<B>int meteorWriteTriangles(int count, int format, int type, const void *data);</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+These functions provide low-level access to point and triangle data.  The
+orientation of the triangle is determined by the order of the triple.
+<A NAME="lbAE">&nbsp;</A>
+<H2>COUNT</H2>
+
+The count specifies how many Points or Triangles to process with this call.
+<A NAME="lbAF">&nbsp;</A>
+<H2>FORMAT</H2>
+
+The <B>format</B> parameter determines what data
+to operate on.  The format is either <B>METEOR_INDEX</B>, or a bitwise mask of
+<B>METEOR_COORDS</B>, <B>METEOR_NORMALS</B>, <B>METEOR_COLORS</B>,
+and <B>METEOR_TEXCOORDS</B>.  The pointdata that is stored or retrieved
+from the <B>data</B> parameter is either a single value which is an index for
+the point, or a sequence of tightly packed triples containing at least one of:
+coords, normals, colors, or texture coordinates in this order. All data has 3
+parts except index data has 1 part.  An index of 0 is the first point when
+using <B>meteorReadPoints</B> or <B>meteorWritePoints</B>. The highest index
+is 1 less than meteorPointCount().  <B>METEOR_INDEX</B> cannot be used when
+writing points.  When writing points, a new point is created if
+<B>METEOR_COORDS</B> is specified, otherwise, the current point's data is
+updated.  When writing triangles, a new triangle is always created.
+<A NAME="lbAG">&nbsp;</A>
+<H2>TYPE</H2>
+
+The <B>type</B> parameter specifies the type of the data,
+<B>METEOR_INT</B>, <B>METEOR_UNSIGNED_INT</B>, <B>METEOR_FLOAT</B>,
+<B>METEOR_DOUBLE</B>, and <B>METEOR_LONG_DOUBLE</B> are supported.
+<A NAME="lbAH">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+On error, -1 is returned, and <B>meteorError</B> is set. Otherwise the count
+processed is returned.  When reading, if this value is less than <B>count</B>
+then there is no more data to read.  Subsequent calls before calling
+<B>meteorRewind</B> will return 0.
+<A NAME="lbAI">&nbsp;</A>
+<H2>ERRORS</H2>
+
+These functions will fail if:
+<BR>
+
+1. The data <B>format</B> requested does not exist in the meteor.
+<BR>
+
+2. The data <B>type</B> is not supported.
+<BR>
+
+3. When reading data, <B>meteorRewind</B> was not called since other meteor modification has
+occured.
+<BR>
+
+4. When writing triangles, specifying data along with index data.
+<A NAME="lbAJ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/meteor.1.html">meteor</A></B>(1)
+
+<B><A HREF="../man3/meteorRewind.3.html">meteorRewind</A></B>(3)
+
+<B><A HREF="../man3/meteorError.3.html">meteorError</A></B>(3)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">COUNT</A><DD>
+<DT><A HREF="#lbAF">FORMAT</A><DD>
+<DT><A HREF="#lbAG">TYPE</A><DD>
+<DT><A HREF="#lbAH">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAI">ERRORS</A><DD>
+<DT><A HREF="#lbAJ">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:02:37 GMT, March 14, 2007
+</BODY>
+</HTML>

@@ -1,0 +1,16 @@
+.TH METEORRESET 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorReset
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "void meteorReset(int format);"
+.SH DESCRIPTION
+This function resets the current meteor removing any previous data.  The
+\fBformat\fP argument specifies what data is to be stored per-point in the
+meteor.  A format description is a simple bitwise mask of \fBMETEOR_COORDS\fP,
+\fBMETEOR_NORMALS\fP, \fBMETEOR_COLORS\fP, and \fBMETEOR_TEXCOORDS\fP.  If the
+required format \fBMETEOR_COORDS\fP is not specified, it is automatically added.
+.SH SEE ALSO
+.BR meteor (1)
+.BR meteorFormat (3)

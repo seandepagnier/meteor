@@ -1,0 +1,17 @@
+.TH METEORSETSIZE 3  2007-02-25 "Meteor Manpage"
+.SH NAME
+meteorSetSize
+.SH SYNOPSIS
+.B #include <meteor.h>
+.sp
+.BI "void meteorSetSize(double xmin, double xmax, double ymin, double ymax,"
+.nl
+\fB                 double zmin, double zmax, double step);
+.SH DESCRIPTION
+This function sets the bounds to use for building a meteor from an equation.
+Each max argument must be greater than or equal to the corresponding min
+argument.  The \fBstep\fP argument must be greater than zero.
+.nl
+A larger area will take longer to process.
+.SH SEE ALSO
+.BR meteorBuild (3)
